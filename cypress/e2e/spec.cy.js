@@ -5,9 +5,8 @@ describe('Search Functionality', () => {
     cy.visit('https://pregomesh.com/en-am')
     cy.get('span[class="sf__search-mb-icon"]').click()
     cy.get('input[name="q"]').type('ring')
-
-    // Assert that search results are displayed
-    cy.contains('Results for')
+    cy.wait(5000); // wait for 5 seconds
+    cy.contains('Results for ').should('be.visible');
   })
 })
 
@@ -22,5 +21,17 @@ describe('Login Functionality', () => {
 
     // Assert that login is successful
     cy.contains('My Account')
+  })
+})
+
+
+describe('SearchItem page', () => {
+  it('Navigate to item page', () => {
+    // Navigate to the page with the catalog
+    cy.visit('https://pregomesh.com/collections/all')
+    // Click on the item to view its details
+    cy.get('div[data-image-id="27989674754115"]').click()
+     // Verify that the item is the desired one
+    cy.get('div[class = "prod__title"]').contains('Ag')
   })
 })
